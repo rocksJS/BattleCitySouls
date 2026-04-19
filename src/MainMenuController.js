@@ -30,7 +30,7 @@ MainMenuController.prototype.keyPressed = function (key) {
   if (key == Keyboard.Key.SELECT || key == Keyboard.Key.DOWN) {
     console.log(this._menu, 'this._menu');
     this._menu.nextItem();
-  } else if (key == Keyboard.Key.START) {
+  } else if (key == Keyboard.Key.START || key == Keyboard.Key.SPACE) {
     this._menu.executeCurrentItem();
   }
 };
