@@ -2,20 +2,21 @@ function MainMenuScene(sceneManager) {
   this._sceneManager = sceneManager;
   this._eventManager = this._sceneManager.getEventManager();
   this._eventManager.addSubscriber(this, [Keyboard.Event.KEY_PRESSED]);
-  
+
   this._y = Globals.CANVAS_HEIGHT;
   this._speed = 3;
-  
+
   this._mainMenu = new MainMenu();
   this._mainMenu.setItems([
     new OnePlayerMenuItem(this._sceneManager),
     new ConstructionMenuItem(this._sceneManager),
-    new ControlsMenuItem(this._sceneManager)   // Controls меню
+    new ControlsMenuItem(this._sceneManager), // Controls меню
   ]);
-  
+
+  console.log(this._mainMenu, 'main menu this MainMenuScene');
   this._mainMenuController = new MainMenuController(this._eventManager, this._mainMenu);
   this._mainMenuController.deactivate();
-  
+
   this._cursor = new MainMenuCursor();
   this._cursorView = new MainMenuCursorView(this._cursor);
   this._mainMenuView = new MainMenuView(this._mainMenu, this._cursorView);
@@ -57,20 +58,20 @@ MainMenuScene.prototype.update = function () {
 MainMenuScene.prototype.draw = function (ctx) {
   this._clearCanvas(ctx);
   ctx.drawImage(ImageManager.getImage('battle_city'), 56, this._y + 80);
-  
-  ctx.fillStyle = "#ffffff";
-  
+
+  ctx.fillStyle = '#ffffff';
+
   ctx.drawImage(ImageManager.getImage('roman_one_white'), 36, this._y + 32);
-  ctx.fillText("-    00", 50, this._y + 46);
-  
-  ctx.fillText("HI- 20000", 178, this._y + 46);
-  
+  ctx.fillText('-    00', 50, this._y + 46);
+
+  ctx.fillText('HI- 20000', 178, this._y + 46);
+
   ctx.drawImage(ImageManager.getImage('namcot'), 176, this._y + 352);
-  
+
   ctx.drawImage(ImageManager.getImage('copyright'), 64, this._y + 384);
-  ctx.fillText("1980 1985 NAMCO LTD.", 98, this._y + 398);
-  ctx.fillText("ALL RIGHTS RESERVED", 98, this._y + 430);
-  
+  ctx.fillText('1980 1985 NAMCO LTD.', 98, this._y + 398);
+  ctx.fillText('ALL RIGHTS RESERVED', 98, this._y + 430);
+
   this._mainMenuView.draw(ctx, this._y);
 };
 
@@ -99,24 +100,24 @@ MainMenuScene.prototype.nextMenuItem = function () {
 };
 
 MainMenuScene.prototype._clearCanvas = function (ctx) {
-  ctx.fillStyle = "#000000";
+  ctx.fillStyle = '#000000';
   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 };
 
 // ====================== НОВЫЙ ПУНКТ МЕНЮ "CONTROLS" ======================
 
 function ControlsMenuItem(sceneManager) {
-    this._sceneManager = sceneManager;
+  this._sceneManager = sceneManager;
 }
 
-ControlsMenuItem.prototype.getName = function() {
-    return "CONTROLS";
+ControlsMenuItem.prototype.getName = function () {
+  return 'CONTROLS';
 };
 
-ControlsMenuItem.prototype.execute = function() {
-    if (typeof ControlsMenu !== "undefined" && typeof ControlsMenu.show === "function") {
-        ControlsMenu.show();
-    } else {
-        console.error("ControlsMenu не найден. Убедись, что файл ControlsMenu.js подключён.");
-    }
+ControlsMenuItem.prototype.execute = function () {
+  if (typeof ControlsMenu !== 'undefined' && typeof ControlsMenu.show === 'function') {
+    ControlsMenu.show();
+  } else {
+    console.error('ControlsMenu не найден. Убедись, что файл ControlsMenu.js подключён.');
+  }
 };

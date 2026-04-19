@@ -15,16 +15,22 @@ MainMenuController.prototype.keyPressed = function (key) {
   if (!this._active) {
     return;
   }
-  
+
   // Если открыто меню Controls — игнорируем навигацию главного меню
   if (document.getElementById('controls-menu')) {
     return;
   }
 
-  if (key == Keyboard.Key.SELECT) {
-    this._menu.nextItem();
+  // Управление
+
+  if (key == Keyboard.Key.UP) {
+    this._menu.previousItem();
   }
-  else if (key == Keyboard.Key.START) {
+
+  if (key == Keyboard.Key.SELECT || key == Keyboard.Key.DOWN) {
+    console.log(this._menu, 'this._menu');
+    this._menu.nextItem();
+  } else if (key == Keyboard.Key.START) {
     this._menu.executeCurrentItem();
   }
 };
