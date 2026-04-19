@@ -43,8 +43,8 @@ ControlsScene.prototype.keyPressed = function (keyCode) {
     this._rebinding = true;
     this._rebindingAction = this._actions[this._selected].action;
   }
-  else if (keyCode == Keyboard.Key.SELECT) {
-    // ←←← ВАЖНО: возвращаемся с arrived = true
+  else if (keyCode == Keyboard.Key.SELECT || keyCode == 27) { // SELECT или ESC
+    // Возвращаемся в главное меню
     this._sceneManager.toMainMenuScene(true);
   }
 };
@@ -84,6 +84,6 @@ ControlsScene.prototype.draw = function (ctx) {
     ctx.fillText("НАЖМИ НОВУЮ КЛАВИШУ...", 98, 380);
   } else {
     ctx.fillStyle = "#ffffff";
-    ctx.fillText("↑↓ — ВЫБОР    SPACE — ИЗМЕНИТЬ    SELECT — В МЕНЮ", 38, 380);
+    ctx.fillText("↑↓ — ВЫБОР    FIRE — ИЗМЕНИТЬ    SELECT/ESC — НАЗАД", 38, 380);
   }
 };

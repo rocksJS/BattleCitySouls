@@ -20,15 +20,14 @@ SceneManager.prototype.toMainMenuScene = function (arrived) {
   this._eventManager.removeAllSubscribers();
   this._scene = new MainMenuScene(this);
   
-  if (arrived) {
-    this._scene.nextMenuItem();
-    this._scene.arrived();
+  if (arrived === true) {
+    this._scene.arrived();        // сразу показываем меню без анимации
   }
 };
 
-SceneManager.prototype.toGameScene = function (stage, player) {
+SceneManager.prototype.toGameScene = function (stage) {
   this._eventManager.removeAllSubscribers();
-  this._scene = new GameScene(this, stage, player);
+  this._scene = new GameScene(this, stage || 1);
 };
 
 SceneManager.prototype.toConstructionScene = function () {
@@ -46,12 +45,21 @@ SceneManager.prototype.toGameOverScene = function () {
   this._scene = new GameOverScene(this);
 };
 
+SceneManager.prototype.toControlsScene = function () {
+  this._eventManager.removeAllSubscribers();
+  this._scene = new ControlsScene(this);
+};
+
 SceneManager.prototype.update = function () {
-  this._scene.update();
+  if (this._scene) {
+    this._scene.update();
+  }
 };
 
 SceneManager.prototype.draw = function (ctx) {
-  this._scene.draw(ctx);
+  if (this._scene) {
+    this._scene.draw(ctx);
+  }
 };
 
 SceneManager.prototype.getEventManager = function () {

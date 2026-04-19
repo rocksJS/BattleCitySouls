@@ -48,6 +48,7 @@ MainMenuScene.prototype.updatePosition = function () {
 MainMenuScene.prototype.arrived = function () {
   this._y = 0;
   this._cursor.makeVisible();
+  this._mainMenuController.activate();
 };
 
 MainMenuScene.prototype.update = function () {
@@ -104,8 +105,7 @@ MainMenuScene.prototype._clearCanvas = function (ctx) {
   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 };
 
-// ====================== НОВЫЙ ПУНКТ МЕНЮ "CONTROLS" ======================
-
+// ====================== CONTROLS ======================
 function ControlsMenuItem(sceneManager) {
   this._sceneManager = sceneManager;
 }
